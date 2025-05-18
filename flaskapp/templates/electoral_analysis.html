@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    
+    <p>
+        This analysis examines the 2019 UK General Election results to identify key patterns in party support
+        across different countries of the UK and to explore how population density relates to voter turnout.
+    </p>
+    
+    <h2>Party Support by Country</h2>
+    <div id='chart1' class='chart' style="width:100%;height:500px;"></div>
+    
+    <!-- Add a table showing the actual party vote percentages -->
+    <h3>Party Vote Percentages by Country</h3>
+    <table border="1" style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+        <tr style="background-color: #f2f2f2; font-weight: bold;">
+            <th>Country</th>
+            <th>Conservative</th>
+            <th>Labour</th>
+            <th>Liberal Democrats</th>
+            <th>Green</th>
+            <th>Brexit</th>
+        </tr>
+        {% for row in party_votes_data %}
+        <tr>
+            <td>{{ row['Country'] }}</td>
+            <td>{{ row['Conservative'] }}</td>
+            <td>{{ row['Labour'] }}</td>
+            <td>{{ row['Liberal Democrats'] }}</td>
+            <td>{{ row['Green'] }}</td>
+            <td>{{ row['Brexit'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <hr>
+    
+    <h2>Population Density and Voter Turnout</h2>
+    
+    <p>
+        The following tables summarize the relationship between population density and voter turnout across the UK.
+        This helps policymakers understand how urbanization affects political engagement.
+    </p>
+    
+    <h3>Country-Level Summary</h3>
+    <table border="1" style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+        <tr style="background-color: #f2f2f2; font-weight: bold;">
+            <th>Country</th>
+            <th>Constituencies</th>
+            <th>Avg Population Density</th>
+            <th>Min Population Density</th>
+            <th>Max Population Density</th>
+            <th>Avg Turnout (%)</th>
+            <th>Min Turnout (%)</th>
+            <th>Max Turnout (%)</th>
+        </tr>
+        {% for row in summary_data %}
+        <tr>
+            <td>{{ row['Country'] }}</td>
+            <td>{{ row['Constituencies'] }}</td>
+            <td>{{ row['Avg Population Density'] }}</td>
+            <td>{{ row['Min Population Density'] }}</td>
+            <td>{{ row['Max Population Density'] }}</td>
+            <td>{{ row['Avg Turnout (%)'] }}</td>
+            <td>{{ row['Min Turnout (%)'] }}</td>
+            <td>{{ row['Max Turnout (%)'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <div style="display: flex; justify-content: space-between;">
+        <div style="width: 48%;">
+            <h3>Constituencies with Highest Turnout</h3>
+            <table border="1" style="width:100%; border-collapse: collapse;">
+                <tr style="background-color: #f2f2f2; font-weight: bold;">
+                    <th>Constituency</th>
+                    <th>Country</th>
+                    <th>Turnout (%)</th>
+                    <th>Population Density</th>
+                </tr>
+                {% for row in highest_turnout_data %}
+                <tr>
+                    <td>{{ row['Constituency'] }}</td>
+                    <td>{{ row['Country'] }}</td>
+                    <td>{{ row['Turnout (%)'] }}</td>
+                    <td>{{ row['Population Density'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        
+        <div style="width: 48%;">
+            <h3>Constituencies with Lowest Turnout</h3>
+            <table border="1" style="width:100%; border-collapse: collapse;">
+                <tr style="background-color: #f2f2f2; font-weight: bold;">
+                    <th>Constituency</th>
+                    <th>Country</th>
+                    <th>Turnout (%)</th>
+                    <th>Population Density</th>
+                </tr>
+                {% for row in lowest_turnout_data %}
+                <tr>
+                    <td>{{ row['Constituency'] }}</td>
+                    <td>{{ row['Country'] }}</td>
+                    <td>{{ row['Turnout (%)'] }}</td>
+                    <td>{{ row['Population Density'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script type='text/javascript'>
+        var graphs1 = {{graphJSON1 | safe}};
+        Plotly.newPlot('chart1', graphs1.data, graphs1.layout);
+    </script>
+{% endblock %}

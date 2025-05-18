@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>assignment4_solution.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="data-structures--algorithms-spring-2025---problem-set-4-solution---ujwal-neethipudi">Data Structures &amp; Algorithms (Spring 2025) - Problem Set 4 Solution - Ujwal Neethipudi</h1>
+<h2 id="question-1-flask-app-with-uk-parliamentary-constituency-data-visualizations">Question 1: Flask App with UK Parliamentary Constituency Data Visualizations</h2>
+<h3 id="1a-scenario-analysis">1(a) Scenario Analysis</h3>
+<p>For this task, I've created visualizations tailored for government policy advisors who are analyzing voter behavior across the UK to inform future policy decisions. These advisors need to understand:</p>
+<ol>
+<li>How party support varies across different countries within the UK (England, Scotland, Wales)</li>
+<li>How demographic factors like population density relate to voter turnout and party preference</li>
+</ol>
+<p>This analysis will help policymakers better understand regional political preferences and factors affecting voter engagement. The insights can be used to design targeted policies addressing region-specific concerns and to develop strategies for increasing democratic participation in areas with historically low engagement.</p>
+<p>The policy advisors will use this data to brief ministers on regional political landscapes, identify areas where specific parties have strong or weak support, and better understand the urban-rural divide in British politics. For effective governance, it's crucial for policymakers to understand these patterns to create policies that address regional needs and concerns.</p>
+<h3 id="1b-first-chart-party-support-by-country">1(b) First Chart: Party Support by Country</h3>
+<p>My first visualization is a chart showing the support for five major political parties (Conservative, Labour, Liberal Democrats, Green, and Brexit Party) across England, Scotland, and Wales. This chart reveals stark differences in party support between countries - particularly Scotland's distinct voting patterns compared to England and Wales.</p>
+<p>This chart is valuable because it helps policymakers quickly identify which parties have significant regional strength, which is essential for understanding how policy proposals might be received in different parts of the UK. The visualization allows for easy comparison between parties and regions, making complex voting data accessible at a glance.</p>
+<p>To ensure clarity and accuracy, I've also included a supporting table that presents the exact vote percentages for each party and country.</p>
+<h3 id="1c-second-chart-population-density-and-voter-turnout-analysis">1(c) Second Chart: Population Density and Voter Turnout Analysis</h3>
+<p>My second visualization consists of summary tables showing the relationship between population density and voter turnout across UK constituencies. The tables provide comprehensive statistics including average, minimum, and maximum values for both population density and voter turnout in each country, as well as highlighting constituencies with the highest and lowest turnout rates.</p>
+<p>This visualization is useful because it helps identify:</p>
+<ol>
+<li>Whether densely populated areas have higher or lower turnout (by comparing constituencies)</li>
+<li>Which countries have the highest and lowest voter participation</li>
+<li>Specific constituencies that could be targeted for voter engagement initiatives</li>
+</ol>
+<p>Policy advisors can use this information to develop targeted strategies for increasing democratic participation in specific types of areas, particularly focusing on the constituencies with the lowest turnout.</p>
+<h2 id="question-2-graph-algorithms-and-network-optimization">Question 2: Graph Algorithms and Network Optimization</h2>
+<h3 id="2a-adjacency-dictionary-and-search-algorithms">2(a) Adjacency Dictionary and Search Algorithms</h3>
+<p>I implemented a <code>GraphTraversal</code> class with DFS and BFS algorithms. For my randomly generated graph, the adjacency dictionary is:</p>
+<pre class="hljs"><code><div>Node 0 -&gt; [4, 5, 8]
+Node 1 -&gt; [2, 5]
+Node 2 -&gt; [1, 8]
+Node 3 -&gt; [4]
+Node 4 -&gt; [3, 0, 7]
+Node 5 -&gt; [0, 6, 1]
+Node 6 -&gt; [5, 9, 7]
+Node 7 -&gt; [4, 6]
+Node 8 -&gt; [0, 2]
+Node 9 -&gt; [6]
+</div></code></pre>
+<p>Starting from node 0, my search algorithms produced these traversals:</p>
+<ul>
+<li>DFS Traversal: [0, 4, 3, 7, 6, 5, 1, 2, 8, 9]</li>
+<li>BFS Traversal: [0, 4, 5, 8, 3, 7, 6, 1, 2, 9]</li>
+</ul>
+<p><strong>Observations</strong>: DFS and BFS reveal fundamentally different approaches to graph exploration. DFS dives deep along a single path, pushing it all the way to its conclusion before backtracking. This creates a traversal pattern that appears to jump around the graph. BFS, in contrast, explores in concentric circles around the starting node, visiting all nearest neighbors before moving outward. This creates a more structured, level-by-level exploration that discovers nodes in order of their distance from the starting point.</p>
+<h3 id="2b-economic-network-optimization">2(b) Economic Network Optimization</h3>
+<h4 id="i-optimization-problem-formulation">i. Optimization Problem Formulation</h4>
+<p>The social planner's problem can be formulated as:</p>
+<p>Maximize: ∑ log(1/d_i + x_i)</p>
+<p>Subject to:</p>
+<ul>
+<li>∑ x_i = B_t</li>
+<li>x_i ≥ 0 for all i</li>
+</ul>
+<p>Where:</p>
+<ul>
+<li>d_i is the degree of node i</li>
+<li>x_i is the budget allocated to node i</li>
+<li>B_t = 10 is the total available budget</li>
+</ul>
+<h4 id="ii-optimal-budget-allocation-solution">ii. Optimal Budget Allocation Solution</h4>
+<p>The optimal budget allocation can be derived using the Lagrangian method. For each node, the optimal allocation is:</p>
+<p>x_i* = max(0, 1/λ - 1/d_i)</p>
+<p>Where λ is the Lagrange multiplier that satisfies:</p>
+<p>∑ x_i* = B_t</p>
+<p>This leads to:</p>
+<p>λ = n / (B_t + ∑(1/d_i))</p>
+<p>Where n is the number of nodes in the network.</p>
+<h4 id="iii-budget-allocation-chart-for-bt--10">iii. Budget Allocation Chart for B_t = 10</h4>
+<p>The calculated allocations for each node in my generated graph are:</p>
+<ul>
+<li>Node 0 (degree 3): 1.2000</li>
+<li>Node 1 (degree 2): 1.0333</li>
+<li>Node 2 (degree 2): 1.0333</li>
+<li>Node 3 (degree 1): 0.5333</li>
+<li>Node 4 (degree 3): 1.2000</li>
+<li>Node 5 (degree 3): 1.2000</li>
+<li>Node 6 (degree 3): 1.2000</li>
+<li>Node 7 (degree 2): 1.0333</li>
+<li>Node 8 (degree 2): 1.0333</li>
+<li>Node 9 (degree 1): 0.5333</li>
+</ul>
+<p>The key insight from these allocations is that nodes with lower degrees receive smaller budget allocations compared to nodes with higher degrees. This demonstrates the principle of diminishing returns - resources are optimally allocated to nodes with the greatest marginal benefit.</p>
+<h4 id="iv-modified-optimization-problem-with-minimum-payoff">iv. Modified Optimization Problem with Minimum Payoff</h4>
+<p>To maximize aggregate welfare while ensuring a minimum payoff ϕ_min for each node, the optimization problem becomes:</p>
+<p>Maximize: ∑ log(1/d_i + x_i)</p>
+<p>Subject to:</p>
+<ul>
+<li>∑ x_i = B_t</li>
+<li>x_i ≥ 0 for all i</li>
+<li>log(1/d_i + x_i) ≥ ϕ_min for all i</li>
+</ul>
+<p>The third constraint can be rewritten as:</p>
+<ul>
+<li>x_i ≥ max(0, e^ϕ_min - 1/d_i) for all i</li>
+</ul>
+<p>This modified problem ensures that every node receives at least enough budget to achieve the minimum required payoff ϕ_min, while still optimizing the overall welfare of the network subject to the total budget constraint.</p>
+<p>GitHub Pull Request URL: <a href="https://github.com/yourusername/my_flask_app_assignment_4/pull/1">https://github.com/yourusername/my_flask_app_assignment_4/pull/1</a></p>
+
+</body>
+</html>
